@@ -6,16 +6,16 @@ OBJ = *.o
 
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(SRC) 
 		@gcc -c $(SRC)
 		@ar rc $(NAME) $(OBJ)
-		@gcc -g $(NAME)
+		@gcc -g main.c $(NAME)
 		./a.out
 
 clean: $(OBJ)
-		@rm $(OBJ)
+		@rm -rf $(OBJ)
 
 fclean: clean
-		@rm -rf $(NAME)
+		@rm -f $(NAME)
 
 re: fclean all

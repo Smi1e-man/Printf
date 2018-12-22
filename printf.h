@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/22 16:09:02 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/22 17:33:05 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 */
 int         ft_printf(const char * restrict format, ...);
 int		    ft_print_str(const char * restrict str, int count);
-int         ft_check(const char * restrict str, va_list argstr, int count);
 /*
 **  lib functions
 */
@@ -45,4 +44,9 @@ typedef struct                  s_list
     int                         precision;
     int                         size;
 }                               t_printf;
+/*
+**
+*/
+int         ft_check(const char * restrict str, va_list argstr, int count, t_printf *elem);
+
 #endif
