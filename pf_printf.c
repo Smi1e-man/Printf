@@ -6,45 +6,60 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 14:00:31 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/25 17:02:29 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int         ft_check(const char * restrict str, va_list argstr, int count, t_printf *elem)
+int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 {
-    char    c;
-
-    ft_save_flag(str, &count, elem);
-    // printf("%d\n", count);
-    ft_save_width(str, &count, elem);
-    // count = ft_save_precision(str, &count, elem);
-    if (str[count] == 'c')
-    {
-        c = va_arg(argstr, int);
-        ft_put_n_char(c, 1);
-    }
-    return (count);
+	ft_save_flag(str, &cnt, el);
+	ft_save_width(str, &cnt, el);
+	ft_save_precision(str, &cnt, el);
+	ft_save_size(str, &cnt, el);
+	if (str[cnt] == 'c')
+		ft_type_c(arg, el);
+	if (str[cnt] == 's')
+		ft_type_s(arg, el);
+	return (cnt);
 }
 
-int         ft_printf(const char * restrict str, ...)
+int		ft_print_str(const char *restrict str, int count)
 {
-    va_list     argstr;
-    t_printf    *elem;
-    int         count;
-
-    count = 0;
-    va_start(argstr, str);
-    elem = (t_printf*)malloc(sizeof(t_printf));
-    while ((count = ft_print_str(str, count)) != -1)
-    {
-        count = ft_check(str, argstr, count, elem);
-        *elem = (t_printf){0,0,0,0,0,0,0,0};
-        count++;
-    }
-    free(elem);
-    va_end(argstr);
-    return (1);
+	while (str[count] != '\0')
+	{
+		if (str[count] == '%' && str[count + 1] == '%')
+		{
+			ft_put_n_char('%', 1);
+			count++;
+		}
+		else if (str[count] == '%')
+			return (count + 1);
+		else
+			ft_put_n_char(str[count], 1);
+		count++;
+	}
+	return (-1);
 }
 
+int		ft_printf(const char *restrict str, ...)
+{
+	va_list		argstr;
+	t_printf	*elem;
+	int			count;
+
+	g_out = 0;
+	count = 0;
+	va_start(argstr, str);
+	elem = (t_printf*)malloc(sizeof(t_printf));
+	while ((count = ft_print_str(str, count)) != -1)
+	{
+		*elem = (t_printf){0, 0, 0, 0, 0, 0, 0, 0};
+		count = ft_check(str, argstr, count, elem);
+		count++;
+	}
+	free(elem);
+	va_end(argstr);
+	return (g_out);
+}
