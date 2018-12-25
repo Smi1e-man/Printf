@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/22 17:31:57 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 17:41:36 by seshevch         ###   ########.fr       */
+/*   Created: 2018/10/27 20:10:34 by seshevch          #+#    #+#             */
+/*   Updated: 2018/12/25 17:25:51 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int		main(void)
+char	*ft_strnew(size_t size)
 {
-	printf("%d\n", printf("hello\n%07s\nworld\n", NULL));
-	printf("----------------------\n");
-	printf("%d\n", ft_printf("hello\n%*.*s\nworld\n", 10, 4, "brave"));
-	// system("leaks a.out");
-	return (0);
+	size_t	i;
+	char	*s1;
+
+	s1 = (char *)malloc(sizeof(char) * (size + 1));
+	if (s1)
+	{
+		i = 0;
+		while (i <= size)
+		{
+			s1[i] = '\0';
+			i++;
+		}
+	}
+	else
+		return (NULL);
+	return (s1);
 }

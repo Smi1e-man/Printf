@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 17:02:47 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/25 17:31:24 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void			ft_put_n_char(char c, int n);
 */
 void			ft_putstr(char const *s);
 size_t			ft_strlen(const char *s);
+void			*ft_memset(void *b, int c, size_t len);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strcat(char *s1, const char *s2);
+char			*ft_strcpy(char *dst, const char *src);
+char			*ft_strnew(size_t size);
+char			*ft_strsub(char const *s, unsigned int start, size_t len);
 /*
 **  struct
 */

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/22 17:31:57 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 17:41:36 by seshevch         ###   ########.fr       */
+/*   Created: 2018/10/24 15:04:19 by seshevch          #+#    #+#             */
+/*   Updated: 2018/12/25 17:20:55 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int		main(void)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	printf("%d\n", printf("hello\n%07s\nworld\n", NULL));
-	printf("----------------------\n");
-	printf("%d\n", ft_printf("hello\n%*.*s\nworld\n", 10, 4, "brave"));
-	// system("leaks a.out");
-	return (0);
+	size_t		i;
+	char		*a;
+
+	a = b;
+	i = 0;
+	while (i < len)
+	{
+		a[i] = c;
+		i++;
+	}
+	return (b);
 }

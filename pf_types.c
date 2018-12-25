@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:53:20 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 17:07:55 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/25 17:42:39 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		ft_type_c(va_list argstr, t_printf *elem)
 void		ft_type_s(va_list argstr, t_printf *elem)
 {
 	char	*s;
+	char	*s1;
 	int		i;
 
 	if (elem->width == -1)
@@ -56,10 +57,12 @@ void		ft_type_s(va_list argstr, t_printf *elem)
 		elem->precision *= -1;
 	s = va_arg(argstr, char *);
 	i = ft_strlen(s);
-
-	if (elem->precision > i)
+	if (elem->precision < i)
 	{
-
+		s1 = ft_strsub(s, 0, elem->precision);
+		s = s1;
+		free(s1);
+		i = ft_strlen(s);
 	}
 	if (elem->width > i)
 	{

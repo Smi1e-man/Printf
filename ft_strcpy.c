@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/22 17:31:57 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 17:41:36 by seshevch         ###   ########.fr       */
+/*   Created: 2018/10/24 18:20:18 by seshevch          #+#    #+#             */
+/*   Updated: 2018/12/25 17:23:47 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int		main(void)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	printf("%d\n", printf("hello\n%07s\nworld\n", NULL));
-	printf("----------------------\n");
-	printf("%d\n", ft_printf("hello\n%*.*s\nworld\n", 10, 4, "brave"));
-	// system("leaks a.out");
-	return (0);
+	int		i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

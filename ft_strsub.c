@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/22 17:31:57 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 17:41:36 by seshevch         ###   ########.fr       */
+/*   Created: 2018/10/28 17:49:01 by seshevch          #+#    #+#             */
+/*   Updated: 2018/12/25 17:31:52 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int		main(void)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	printf("%d\n", printf("hello\n%07s\nworld\n", NULL));
-	printf("----------------------\n");
-	printf("%d\n", ft_printf("hello\n%*.*s\nworld\n", 10, 4, "brave"));
-	// system("leaks a.out");
-	return (0);
+	char			*s1;
+	unsigned int	i;
+
+	if (s)
+	{
+		s1 = (char *)ft_strnew(len);
+		if (s1)
+		{
+			i = 0;
+			while (i < len)
+			{
+				s1[i] = s[start];
+				i++;
+				start++;
+			}
+		}
+		return (s1);
+	}
+	return ((char *)s);
 }
