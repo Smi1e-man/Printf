@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 17:31:57 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/22 17:33:07 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/25 14:06:17 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int         main(void)
 {
-    printf("hello\n%c\nworld\n", 'S');
+    printf("hello\n%00000c\nworld\n", 'S');
     printf("----------------------\n");
-    ft_printf("qweq%c\n", 'S');
+    ft_printf("hello\n%12c\nworld\n%4c\n", 'S', 'H');
+    // system("leaks a.out");
     return (0);
 }

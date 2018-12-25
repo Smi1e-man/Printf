@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/22 17:33:05 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/25 13:59:45 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ typedef struct                  s_list
     int                         size;
 }                               t_printf;
 /*
-**
+** function with struct
 */
 int         ft_check(const char * restrict str, va_list argstr, int count, t_printf *elem);
+void        ft_save_flag(const char * restrict str, int *count, t_printf *elem);
+void        ft_save_width(const char * restrict str, int *count, t_printf *elem);
 
 #endif

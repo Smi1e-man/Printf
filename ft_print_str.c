@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 21:08:31 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/22 15:29:04 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/25 13:20:35 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_print_str(const char * restrict str, int count)
 			count++;
 		}
 		else if (str[count] == '%')
-			return (count++);
+			return (count + 1);
 		else
 			ft_put_n_char(str[count], 1);
 		count++;

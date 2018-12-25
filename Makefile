@@ -1,6 +1,7 @@
 NAME = libftprintf.a
 
-SRC = printf.c ft_put_n_char.c ft_putstr.c ft_print_str.c
+SRC = pf_printf.c ft_put_n_char.c ft_putstr.c ft_print_str.c \
+		pf_save_strct.c
 
 OBJ = *.o
 
@@ -12,7 +13,7 @@ $(NAME): $(SRC)
 		@gcc -g main.c $(NAME)
 		./a.out
 
-clean: $(OBJ)
+clean:
 		@rm -rf $(OBJ)
 
 fclean: clean
