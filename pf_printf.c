@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/26 15:14:54 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/26 19:23:43 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 		ft_type_c(arg, el);
 	if (str[cnt] == 's')
 		ft_type_s(arg, el);
+	if (str[cnt] == 'p')
+		ft_type_p(arg, el);
+	if (str[cnt] == 'o')
+		ft_type_o(arg, el);
 	return (cnt);
 }
 

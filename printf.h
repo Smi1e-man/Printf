@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/26 15:02:48 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/26 19:23:19 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strnew(size_t size);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strdup(const char *s1);
+char			*ft_itoa_base(unsigned long long val, int base);
 /*
 **  struct
 */
@@ -75,6 +76,8 @@ void			ft_save_size(const char *restrict str,
 **  types
 */
 void			ft_type_c(va_list argstr, t_printf *elem);
-void		ft_type_s(va_list argstr, t_printf *elem);
+void			ft_type_s(va_list argstr, t_printf *elem);
+void			ft_type_p(va_list argstr, t_printf *elem);
+void			ft_type_o(va_list argstr, t_printf *elem);
 
 #endif
