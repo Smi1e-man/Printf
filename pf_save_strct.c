@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 12:29:53 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 16:42:06 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/26 15:03:09 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,22 @@ void	ft_save_flag(const char *restrict str, int *count, t_printf *elem)
 	}
 }
 
-void	ft_save_width(const char *restrict str, int *count, t_printf *elem)
+void	ft_save_width(const char *restrict str, int *count, t_printf *elem, va_list argstr)
 {
 	int		numb;
 
 	if (str[count[0]] == '*')
-		elem->width = -1;
-	numb = 0;
-	while (str[count[0]] >= '0' && str[count[0]] <= '9')
 	{
-		numb *= 10;
-		numb = numb + (str[count[0]] - '0');
+		elem->width = va_arg(argstr, int);
+		if (elem->width < 0)
+		{
+			elem->width *= -1;
+			elem->flg_min = '-';
+		}
 		count[0]++;
 	}
-	if (elem->width != -1)
-		elem->width = numb;
-	if (elem->width == -1)
-		count[0]++;
-}
-
-void	ft_save_precision(const char *restrict str, int *count, t_printf *elem)
-{
-	int		numb;
-
-	if (str[count[0]] == '.')
+	else
 	{
-		count[0]++;
-		if (str[count[0]] == '*')
-			elem->precision = -1;
 		numb = 0;
 		while (str[count[0]] >= '0' && str[count[0]] <= '9')
 		{
@@ -66,10 +54,38 @@ void	ft_save_precision(const char *restrict str, int *count, t_printf *elem)
 			numb = numb + (str[count[0]] - '0');
 			count[0]++;
 		}
-		if (elem->precision != -1)
-			elem->precision = numb;
-		if (elem->precision == -1)
+		elem->width = numb;
+	}
+}
+
+void	ft_save_precision(const char *restrict str, int *count, t_printf *elem, va_list argstr)
+{
+	int		numb;
+
+	if (str[count[0]] == '.')
+	{
+		count[0]++;
+		if (str[count[0]] == '*')
+		{
+			elem->precision = va_arg(argstr, int);
+			if (elem->precision < 0)
+			{
+				elem->precision *= -1;
+				elem->flg_min = '-';
+			}
 			count[0]++;
+		}
+		else
+		{
+			numb = 0;
+			while (str[count[0]] >= '0' && str[count[0]] <= '9')
+			{
+				numb *= 10;
+				numb = numb + (str[count[0]] - '0');
+				count[0]++;
+			}
+			elem->precision = numb;
+		}
 	}
 }
 

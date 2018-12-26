@@ -3,7 +3,7 @@ NAME = libftprintf.a
 SRC = pf_printf.c ft_put_n_char.c ft_putstr.c ft_putstr.c \
 		pf_save_strct.c pf_types.c ft_strlen.c ft_memset.c \
 		ft_strcat.c ft_strcpy.c ft_strjoin.c ft_strnew.c \
-		ft_strsub.c
+		ft_strsub.c ft_strdup.c 
 
 OBJ = *.o
 

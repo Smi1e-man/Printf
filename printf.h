@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/25 17:31:24 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/26 15:02:48 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strnew(size_t size);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
+char			*ft_strdup(const char *s1);
 /*
 **  struct
 */
@@ -65,9 +66,9 @@ int				ft_check(const char *restrict str, va_list argstr,
 void			ft_save_flag(const char *restrict str,
 							int *count, t_printf *elem);
 void			ft_save_width(const char *restrict str,
-							int *count, t_printf *elem);
+							int *count, t_printf *elem, va_list argstr);
 void			ft_save_precision(const char *restrict str,
-							int *count, t_printf *elem);
+							int *count, t_printf *elem, va_list argstr);
 void			ft_save_size(const char *restrict str,
 							int *count, t_printf *elem);
 /*
