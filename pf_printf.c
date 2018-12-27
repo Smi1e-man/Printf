@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/26 19:23:43 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/27 12:51:55 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 	ft_save_size(str, &cnt, el);
 	if (str[cnt] == 'c')
 		ft_type_c(arg, el);
-	if (str[cnt] == 's')
+	else if (str[cnt] == 's')
 		ft_type_s(arg, el);
-	if (str[cnt] == 'p')
+	else if (str[cnt] == 'p')
 		ft_type_p(arg, el);
-	if (str[cnt] == 'o')
+	else if (str[cnt] == 'o')
 		ft_type_o(arg, el);
+	else if (str[cnt] == 'x')
+		ft_type_x(arg, el);
+	else
+		ft_type_non(str[cnt], el);
 	return (cnt);
 }
 

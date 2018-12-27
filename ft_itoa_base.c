@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 15:22:12 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/26 16:23:41 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/27 13:26:48 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_itoa_base(unsigned long long val, int base)
 		v1 /= base;
 		i++;
 	}
+	if (val == 0)
+		i++;
 	str = ft_strnew(i);
 	while (i-- != 0)
 	{

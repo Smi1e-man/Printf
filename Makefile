@@ -9,13 +9,13 @@ OBJ = *.o
 
 all: $(NAME)
 
-$(NAME): $(SRC) 
+$(NAME): $(SRC)
 		@gcc -c $(SRC)
 		@ar rc $(NAME) $(OBJ)
-		@gcc -g main.c $(NAME)
+		@gcc -g ~/main.c $(NAME)
 		./a.out
 
-clean:
+clean: $(OBJ)
 		@rm -rf $(OBJ)
 
 fclean: clean

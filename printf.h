@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/26 19:23:19 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/27 12:57:49 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ void			ft_type_c(va_list argstr, t_printf *elem);
 void			ft_type_s(va_list argstr, t_printf *elem);
 void			ft_type_p(va_list argstr, t_printf *elem);
 void			ft_type_o(va_list argstr, t_printf *elem);
+void			ft_type_x(va_list argstr, t_printf *elem);
+void			ft_type_non(char c, t_printf *elem);
 
 #endif
