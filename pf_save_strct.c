@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 12:29:53 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/26 15:03:09 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/28 18:21:15 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_save_width(const char *restrict str, int *count, t_printf *elem, va_list
 		}
 		count[0]++;
 	}
-	else
+	else if (str[count[0]] >= '0' && str[count[0]] <= '9')
 	{
 		numb = 0;
 		while (str[count[0]] >= '0' && str[count[0]] <= '9')

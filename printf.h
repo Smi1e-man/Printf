@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/27 12:57:49 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/28 19:26:09 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char			*ft_strnew(size_t size);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strdup(const char *s1);
 char			*ft_itoa_base(unsigned long long val, int base);
+void			ft_toupper(char **s);
 /*
 **  struct
 */
@@ -79,7 +80,7 @@ void			ft_type_c(va_list argstr, t_printf *elem);
 void			ft_type_s(va_list argstr, t_printf *elem);
 void			ft_type_p(va_list argstr, t_printf *elem);
 void			ft_type_o(va_list argstr, t_printf *elem);
-void			ft_type_x(va_list argstr, t_printf *elem);
+void			ft_type_x(va_list argstr, t_printf *elem, char type);
 void			ft_type_non(char c, t_printf *elem);
 
 #endif

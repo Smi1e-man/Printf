@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/27 12:51:55 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/27 15:39:33 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 		ft_type_p(arg, el);
 	else if (str[cnt] == 'o')
 		ft_type_o(arg, el);
-	else if (str[cnt] == 'x')
-		ft_type_x(arg, el);
+	else if (str[cnt] == 'x' || str[cnt] == 'X')
+		ft_type_x(arg, el, str[cnt]);
 	else
 		ft_type_non(str[cnt], el);
 	return (cnt);
@@ -63,7 +63,7 @@ int		ft_printf(const char *restrict str, ...)
 	elem = (t_printf*)malloc(sizeof(t_printf));
 	while ((count = ft_print_str(str, count)) != -1)
 	{
-		*elem = (t_printf){0, 0, 0, 0, 0, -1, -1, 0};
+		*elem = (t_printf){-1, -1, -1, -1, -1, -1, -1, -1};
 		count = ft_check(str, argstr, count, elem);
 		count++;
 	}
