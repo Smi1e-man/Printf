@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/28 19:26:09 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/29 18:21:31 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stdarg.h>
 # include <stdio.h>
 
+/*
+**	modul number
+*/
+# define MDL(a) ((a < 0) ? a * (-1) : a)
 /*
 **  global param
 */
@@ -41,6 +45,7 @@ char			*ft_strnew(size_t size);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strdup(const char *s1);
 char			*ft_itoa_base(unsigned long long val, int base);
+char			*ft_itoa_base_d(long long val, int base);
 void			ft_toupper(char **s);
 /*
 **  struct
@@ -67,10 +72,10 @@ int				ft_check(const char *restrict str, va_list argstr,
 */
 void			ft_save_flag(const char *restrict str,
 							int *count, t_printf *elem);
-void			ft_save_width(const char *restrict str,
+void			ft_sv_w(const char *restrict str,
 							int *count, t_printf *elem, va_list argstr);
-void			ft_save_precision(const char *restrict str,
-							int *count, t_printf *elem, va_list argstr);
+void			ft_p(const char *restrict s,
+						int *cnt, t_printf *el, va_list as);
 void			ft_save_size(const char *restrict str,
 							int *count, t_printf *elem);
 /*
@@ -79,8 +84,33 @@ void			ft_save_size(const char *restrict str,
 void			ft_type_c(va_list argstr, t_printf *elem);
 void			ft_type_s(va_list argstr, t_printf *elem);
 void			ft_type_p(va_list argstr, t_printf *elem);
+/*
+**	mod o
+*/
 void			ft_type_o(va_list argstr, t_printf *elem);
+void			ft_type_mods_o(va_list argstr, t_printf *elem);
+void			ft_mod_o_hh(va_list argstr, t_printf *elem);
+void			ft_mod_o_ll(va_list argstr, t_printf *elem);
+void			ft_mod_o_l(va_list argstr, t_printf *elem);
+void			ft_mod_o_h(va_list argstr, t_printf *elem);
+/*
+**	mod x
+*/
 void			ft_type_x(va_list argstr, t_printf *elem, char type);
+void			ft_type_mods_x(va_list argstr, t_printf *elem, char type);
+void			ft_mod_x_hh(va_list argstr, t_printf *elem, char type);
+void			ft_mod_x_ll(va_list argstr, t_printf *elem, char type);
+void			ft_mod_x_l(va_list argstr, t_printf *elem, char type);
+void			ft_mod_x_h(va_list argstr, t_printf *elem, char type);
+/*
+**	mod d
+*/
+void			ft_type_d(va_list argstr, t_printf *elem);
+
+
+void			ft_mod_precision(char **str, t_printf *elem, int check);
+void			ft_mod_hsh(char **str, char *s, char type);
+void			ft_mod_width(char **str, t_printf *elem, char type);
 void			ft_type_non(char c, t_printf *elem);
 
 #endif

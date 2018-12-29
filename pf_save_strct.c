@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 12:29:53 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/28 18:21:15 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/29 14:37:12 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,60 +31,57 @@ void	ft_save_flag(const char *restrict str, int *count, t_printf *elem)
 	}
 }
 
-void	ft_save_width(const char *restrict str, int *count, t_printf *elem, va_list argstr)
+void	ft_sv_w(const char *restrict s, int *cnt, t_printf *el, va_list as)
 {
-	int		numb;
+	int		n;
 
-	if (str[count[0]] == '*')
+	if (s[cnt[0]] == '*')
 	{
-		elem->width = va_arg(argstr, int);
-		if (elem->width < 0)
+		el->width = va_arg(as, int);
+		if (el->width < 0)
 		{
-			elem->width *= -1;
-			elem->flg_min = '-';
+			el->width *= -1;
+			el->flg_min = '-';
 		}
-		count[0]++;
+		cnt[0]++;
 	}
-	else if (str[count[0]] >= '0' && str[count[0]] <= '9')
+	else if (s[cnt[0]] >= '0' && s[cnt[0]] <= '9')
 	{
-		numb = 0;
-		while (str[count[0]] >= '0' && str[count[0]] <= '9')
+		n = 0;
+		while (s[cnt[0]] >= '0' && s[cnt[0]] <= '9')
 		{
-			numb *= 10;
-			numb = numb + (str[count[0]] - '0');
-			count[0]++;
+			n *= 10;
+			n = n + (s[cnt[0]] - '0');
+			cnt[0]++;
 		}
-		elem->width = numb;
+		el->width = n;
 	}
 }
 
-void	ft_save_precision(const char *restrict str, int *count, t_printf *elem, va_list argstr)
+void	ft_p(const char *restrict s, int *cnt, t_printf *el, va_list as)
 {
-	int		numb;
-
-	if (str[count[0]] == '.')
+	if (s[cnt[0]] == '.')
 	{
-		count[0]++;
-		if (str[count[0]] == '*')
+		cnt[0]++;
+		if (s[cnt[0]] == '*')
 		{
-			elem->precision = va_arg(argstr, int);
-			if (elem->precision < 0)
+			el->precision = va_arg(as, int);
+			if (el->precision < 0)
 			{
-				elem->precision *= -1;
-				elem->flg_min = '-';
+				el->precision *= -1;
+				el->flg_min = '-';
 			}
-			count[0]++;
+			cnt[0]++;
 		}
 		else
 		{
-			numb = 0;
-			while (str[count[0]] >= '0' && str[count[0]] <= '9')
+			el->precision = 0;
+			while (s[cnt[0]] >= '0' && s[cnt[0]] <= '9')
 			{
-				numb *= 10;
-				numb = numb + (str[count[0]] - '0');
-				count[0]++;
+				el->precision *= 10;
+				el->precision = el->precision + (s[cnt[0]] - '0');
+				cnt[0]++;
 			}
-			elem->precision = numb;
 		}
 	}
 }
@@ -107,8 +104,6 @@ void	ft_save_size(const char *restrict str, int *count, t_printf *elem)
 			elem->size = 'h';
 		else if (str[count[0]] == 'l')
 			elem->size = 'l';
-		else if (str[count[0]] == 'L')
-			elem->size = 'L';
 		count[0]++;
 	}
 }

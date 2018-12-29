@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/27 15:39:33 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/29 16:53:57 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 {
 	ft_save_flag(str, &cnt, el);
-	ft_save_width(str, &cnt, el, arg);
-	ft_save_precision(str, &cnt, el, arg);
+	ft_sv_w(str, &cnt, el, arg);
+	ft_p(str, &cnt, el, arg);
 	ft_save_size(str, &cnt, el);
 	if (str[cnt] == 'c')
 		ft_type_c(arg, el);
@@ -25,9 +25,11 @@ int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 	else if (str[cnt] == 'p')
 		ft_type_p(arg, el);
 	else if (str[cnt] == 'o')
-		ft_type_o(arg, el);
+		ft_type_mods_o(arg, el);
 	else if (str[cnt] == 'x' || str[cnt] == 'X')
-		ft_type_x(arg, el, str[cnt]);
+		ft_type_mods_x(arg, el, str[cnt]);
+	else if (str[cnt] == 'd')
+		ft_type_d(arg, el);
 	else
 		ft_type_non(str[cnt], el);
 	return (cnt);

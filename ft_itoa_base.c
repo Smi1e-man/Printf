@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 15:22:12 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/27 13:26:48 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/29 19:55:03 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,38 @@ char	*ft_itoa_base(unsigned long long val, int base)
 			v1 = (val % base) + '0';
 		str[i] = v1;
 		val /= base;
+	}
+	return (str);
+}
+
+char	*ft_itoa_base_d(long long val, int base)
+{
+	char					*str;
+	unsigned int			i;
+	long long				v1;
+
+	i = 0;
+	v1 = val;
+	// printf("%lld\n", v1);
+	while (v1 != 0)
+	{
+		v1 /= base;
+		i++;
+	}
+	if (val == 0)
+		i++;
+	str = ft_strnew(i);
+	while (i-- != 0)
+	{
+		// i--;
+		if (MDL(val % base) > 9)
+			v1 = MDL(val % base) - 10 + 'a';
+		else
+			v1 = MDL(val % base) + '0';
+		// printf("%c\n", MDL(val % base));
+		str[i] = v1;
+		val /= base;
+		// printf("%d\n", i);
 	}
 	return (str);
 }
