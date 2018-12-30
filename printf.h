@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/29 18:21:31 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/30 16:02:36 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void			ft_save_size(const char *restrict str,
 void			ft_type_c(va_list argstr, t_printf *elem);
 void			ft_type_s(va_list argstr, t_printf *elem);
 void			ft_type_p(va_list argstr, t_printf *elem);
+void			ft_type_non(char c, t_printf *elem);
 /*
 **	mod o
 */
@@ -103,14 +104,21 @@ void			ft_mod_x_ll(va_list argstr, t_printf *elem, char type);
 void			ft_mod_x_l(va_list argstr, t_printf *elem, char type);
 void			ft_mod_x_h(va_list argstr, t_printf *elem, char type);
 /*
-**	mod d
+**	mod d & i
 */
+int				ft_flg_d(char **str, int i, char prnt, t_printf *elem);
+void			ft_path(char **str, t_printf *elem, char prnt, char *sml);
 void			ft_type_d(va_list argstr, t_printf *elem);
-
-
+void			ft_type_mods_d(va_list argstr, t_printf *elem);
+void			ft_mod_d_hh(va_list argstr, t_printf *elem);
+void			ft_mod_d_ll(va_list argstr, t_printf *elem);
+void			ft_mod_d_l(va_list argstr, t_printf *elem);
+void			ft_mod_d_h(va_list argstr, t_printf *elem);
+/*
+**	mods
+*/
 void			ft_mod_precision(char **str, t_printf *elem, int check);
 void			ft_mod_hsh(char **str, char *s, char type);
 void			ft_mod_width(char **str, t_printf *elem, char type);
-void			ft_type_non(char c, t_printf *elem);
 
 #endif
