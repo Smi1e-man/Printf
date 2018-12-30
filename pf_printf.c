@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/30 14:57:19 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/30 16:50:58 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 		ft_type_mods_x(arg, el, str[cnt]);
 	else if (str[cnt] == 'd' || str[cnt] == 'i')
 		ft_type_mods_d(arg, el);
+	else if (str[cnt] == 'u')
+		ft_type_mods_u(arg, el);
+	else if (str[cnt] == 'U')
+		ft_mod_u_l(arg, el);
 	else
 		ft_type_non(str[cnt], el);
 	return (cnt);

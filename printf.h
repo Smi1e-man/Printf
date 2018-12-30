@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/30 16:02:36 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/30 16:57:02 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 /*
 **	modul number
 */
+
 # define MDL(a) ((a < 0) ? a * (-1) : a)
+
 /*
 **  global param
 */
@@ -86,10 +88,16 @@ void			ft_type_s(va_list argstr, t_printf *elem);
 void			ft_type_p(va_list argstr, t_printf *elem);
 void			ft_type_non(char c, t_printf *elem);
 /*
+**	type mods
+*/
+void			ft_type_mods_o(va_list argstr, t_printf *elem);
+void			ft_type_mods_x(va_list argstr, t_printf *elem, char type);
+void			ft_type_mods_d(va_list argstr, t_printf *elem);
+void			ft_type_mods_u(va_list argstr, t_printf *elem);
+/*
 **	mod o
 */
 void			ft_type_o(va_list argstr, t_printf *elem);
-void			ft_type_mods_o(va_list argstr, t_printf *elem);
 void			ft_mod_o_hh(va_list argstr, t_printf *elem);
 void			ft_mod_o_ll(va_list argstr, t_printf *elem);
 void			ft_mod_o_l(va_list argstr, t_printf *elem);
@@ -98,7 +106,6 @@ void			ft_mod_o_h(va_list argstr, t_printf *elem);
 **	mod x
 */
 void			ft_type_x(va_list argstr, t_printf *elem, char type);
-void			ft_type_mods_x(va_list argstr, t_printf *elem, char type);
 void			ft_mod_x_hh(va_list argstr, t_printf *elem, char type);
 void			ft_mod_x_ll(va_list argstr, t_printf *elem, char type);
 void			ft_mod_x_l(va_list argstr, t_printf *elem, char type);
@@ -109,11 +116,18 @@ void			ft_mod_x_h(va_list argstr, t_printf *elem, char type);
 int				ft_flg_d(char **str, int i, char prnt, t_printf *elem);
 void			ft_path(char **str, t_printf *elem, char prnt, char *sml);
 void			ft_type_d(va_list argstr, t_printf *elem);
-void			ft_type_mods_d(va_list argstr, t_printf *elem);
 void			ft_mod_d_hh(va_list argstr, t_printf *elem);
 void			ft_mod_d_ll(va_list argstr, t_printf *elem);
 void			ft_mod_d_l(va_list argstr, t_printf *elem);
 void			ft_mod_d_h(va_list argstr, t_printf *elem);
+/*
+**	mod u
+*/
+void			ft_type_u(va_list argstr, t_printf *elem);
+void			ft_mod_u_hh(va_list argstr, t_printf *elem);
+void			ft_mod_u_ll(va_list argstr, t_printf *elem);
+void			ft_mod_u_l(va_list argstr, t_printf *elem);
+void			ft_mod_u_h(va_list argstr, t_printf *elem);
 /*
 **	mods
 */

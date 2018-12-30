@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_type_mod_o.c                                    :+:      :+:    :+:   */
+/*   pf_type_mod_u.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/29 12:56:14 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/30 16:40:52 by seshevch         ###   ########.fr       */
+/*   Created: 2018/12/30 16:19:25 by seshevch          #+#    #+#             */
+/*   Updated: 2018/12/30 16:40:56 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		ft_mod_o_hh(va_list argstr, t_printf *elem)
+void		ft_mod_u_hh(va_list argstr, t_printf *elem)
 {
 	unsigned char		i;
 	char				*str;
 
 	i = (unsigned char)va_arg(argstr, unsigned int);
-	str = ft_itoa_base(i, 8);
+	str = ft_itoa_base(i, 10);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
@@ -41,13 +41,13 @@ void		ft_mod_o_hh(va_list argstr, t_printf *elem)
 	free(str);
 }
 
-void		ft_mod_o_ll(va_list argstr, t_printf *elem)
+void		ft_mod_u_ll(va_list argstr, t_printf *elem)
 {
-	unsigned long long		i;
-	char					*str;
+	unsigned long long	i;
+	char				*str;
 
 	i = va_arg(argstr, unsigned long long);
-	str = ft_itoa_base(i, 8);
+	str = ft_itoa_base(i, 10);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
@@ -70,13 +70,13 @@ void		ft_mod_o_ll(va_list argstr, t_printf *elem)
 	free(str);
 }
 
-void		ft_mod_o_l(va_list argstr, t_printf *elem)
+void		ft_mod_u_l(va_list argstr, t_printf *elem)
 {
 	unsigned long		i;
 	char				*str;
 
 	i = va_arg(argstr, unsigned long);
-	str = ft_itoa_base(i, 8);
+	str = ft_itoa_base(i, 10);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
@@ -99,13 +99,13 @@ void		ft_mod_o_l(va_list argstr, t_printf *elem)
 	free(str);
 }
 
-void		ft_mod_o_h(va_list argstr, t_printf *elem)
+void		ft_mod_u_h(va_list argstr, t_printf *elem)
 {
 	unsigned short		i;
 	char				*str;
 
 	i = (unsigned short)va_arg(argstr, unsigned int);
-	str = ft_itoa_base(i, 8);
+	str = ft_itoa_base(i, 10);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
@@ -128,13 +128,13 @@ void		ft_mod_o_h(va_list argstr, t_printf *elem)
 	free(str);
 }
 
-void		ft_type_o(va_list argstr, t_printf *elem)
+void		ft_type_u(va_list argstr, t_printf *elem)
 {
 	unsigned int		i;
 	char				*str;
 
-	i = va_arg(argstr, unsigned long long);
-	str = ft_itoa_base(i, 8);
+	i = va_arg(argstr, unsigned int);
+	str = ft_itoa_base(i, 10);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))

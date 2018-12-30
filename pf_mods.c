@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 18:51:05 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/29 18:24:28 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/12/30 16:32:10 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,30 +74,38 @@ void		ft_mod_width(char **str, t_printf *elem, char type)
 		ft_put_n_char(' ', elem->width - ft_strlen(str[0]));
 }
 
-void		ft_type_mods_x(va_list argstr, t_printf *elem, char type)
+void		ft_path(char **str, t_printf *elem, char prnt, char *sml)
 {
-	if (elem->size == 1)
-		ft_mod_x_hh(argstr, elem, type);
-	else if (elem->size == 2)
-		ft_mod_x_ll(argstr, elem, type);
-	else if (elem->size == 'l')
-		ft_mod_x_l(argstr, elem, type);
-	else if (elem->size == 'h')
-		ft_mod_x_h(argstr, elem, type);
-	else
-		ft_type_x(argstr, elem, type);
+	if (prnt == '0')
+	{
+		elem->width -= 1;
+		ft_mod_precision(&str[0], elem, 2);
+	}
+	ft_mod_hsh(&str[0], sml, '1');
 }
 
-void		ft_type_mods_o(va_list argstr, t_printf *elem)
+int			ft_flg_d(char **str, int i, char prnt, t_printf *elem)
 {
-	if (elem->size == 1)
-		ft_mod_o_hh(argstr, elem);
-	else if (elem->size == 2)
-		ft_mod_o_ll(argstr, elem);
-	else if (elem->size == 'l')
-		ft_mod_o_l(argstr, elem);
-	else if (elem->size == 'h')
-		ft_mod_o_h(argstr, elem);
-	else
-		ft_type_o(argstr, elem);
+	if (i == '-')
+	{
+		ft_path(&str[0], elem, prnt, "-");
+		i = 2;
+	}
+	else if (elem->flg_sum == '+' && str[0][0] != '-')
+	{
+		ft_path(&str[0], elem, prnt, "+");
+		elem->flg_sum = -1;
+	}
+	else if (elem->flg_spc == ' ')
+	{
+		ft_mod_hsh(&str[0], " ", '1');
+		elem->flg_spc = -1;
+	}
+	else if (prnt == '0')
+		ft_mod_precision(&str[0], elem, 2);
+	if (prnt != -1 && prnt != '0')
+		ft_put_n_char(prnt, elem->width - ft_strlen(str[0]));
+	else if (prnt == -1)
+		ft_putstr(str[0]);
+	return (i);
 }
