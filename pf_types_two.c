@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_type_mod_u.c                                    :+:      :+:    :+:   */
+/*   pf_types_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/30 16:19:25 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/30 16:40:56 by seshevch         ###   ########.fr       */
+/*   Created: 2019/01/03 16:47:06 by seshevch          #+#    #+#             */
+/*   Updated: 2019/01/03 16:50:45 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		ft_mod_u_hh(va_list argstr, t_printf *elem)
+void		ft_type_d(va_list argstr, t_printf *elem)
 {
-	unsigned char		i;
 	char				*str;
 
-	i = (unsigned char)va_arg(argstr, unsigned int);
-	str = ft_itoa_base(i, 10);
+	str = ft_itoa_base_d(elem->type.i, 10);
+	elem->type.i < 0 ? elem->type.i = '-' : 0;
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
-	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
 		ft_mod_precision(&str, elem, 1);
 	if (elem->width != -1 && elem->width > ft_strlen(str))
@@ -28,84 +26,23 @@ void		ft_mod_u_hh(va_list argstr, t_printf *elem)
 		if ((elem->flg_min != '-' && elem->flg_nul != '0') ||
 			(elem->flg_min != '-' && elem->flg_nul == '0' &&
 			elem->precision != -1))
-			ft_put_n_char(' ', elem->width - ft_strlen(str));
+			elem->type.i = (short)ft_flg_d(&str, (int)elem->type.i, ' ', elem);
 		else if (elem->flg_min != '-' && elem->precision == -1 &&
 				elem->flg_nul == '0')
-			ft_put_n_char('0', elem->width - ft_strlen(str));
-		ft_putstr(str);
-		if (elem->flg_min == '-')
-			ft_put_n_char(' ', elem->width - ft_strlen(str));
+			elem->type.i = (short)ft_flg_d(&str, (int)elem->type.i, '0', elem);
+		elem->type.i = (short)ft_flg_d(&str, (int)elem->type.i, -1, elem);
+		elem->flg_min == '-' ? ft_flg_d(&str, elem->type.i, ' ', elem) : 0;
 	}
 	else
-		ft_putstr(str);
+		ft_flg_d(&str, elem->type.i, -1, elem);
 	free(str);
 }
 
-void		ft_mod_u_ll(va_list argstr, t_printf *elem)
+void		ft_type_o(va_list argstr, t_printf *elem)
 {
-	unsigned long long	i;
 	char				*str;
 
-	i = va_arg(argstr, unsigned long long);
-	str = ft_itoa_base(i, 10);
-	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
-	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
-	if (elem->precision != -1 && elem->precision > ft_strlen(str))
-		ft_mod_precision(&str, elem, 1);
-	if (elem->width != -1 && elem->width > ft_strlen(str))
-	{
-		if ((elem->flg_min != '-' && elem->flg_nul != '0') ||
-			(elem->flg_min != '-' && elem->flg_nul == '0' &&
-			elem->precision != -1))
-			ft_put_n_char(' ', elem->width - ft_strlen(str));
-		else if (elem->flg_min != '-' && elem->precision == -1 &&
-				elem->flg_nul == '0')
-			ft_put_n_char('0', elem->width - ft_strlen(str));
-		ft_putstr(str);
-		if (elem->flg_min == '-')
-			ft_put_n_char(' ', elem->width - ft_strlen(str));
-	}
-	else
-		ft_putstr(str);
-	free(str);
-}
-
-void		ft_mod_u_l(va_list argstr, t_printf *elem)
-{
-	unsigned long		i;
-	char				*str;
-
-	i = va_arg(argstr, unsigned long);
-	str = ft_itoa_base(i, 10);
-	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
-	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
-	if (elem->precision != -1 && elem->precision > ft_strlen(str))
-		ft_mod_precision(&str, elem, 1);
-	if (elem->width != -1 && elem->width > ft_strlen(str))
-	{
-		if ((elem->flg_min != '-' && elem->flg_nul != '0') ||
-			(elem->flg_min != '-' && elem->flg_nul == '0' &&
-			elem->precision != -1))
-			ft_put_n_char(' ', elem->width - ft_strlen(str));
-		else if (elem->flg_min != '-' && elem->precision == -1 &&
-				elem->flg_nul == '0')
-			ft_put_n_char('0', elem->width - ft_strlen(str));
-		ft_putstr(str);
-		if (elem->flg_min == '-')
-			ft_put_n_char(' ', elem->width - ft_strlen(str));
-	}
-	else
-		ft_putstr(str);
-	free(str);
-}
-
-void		ft_mod_u_h(va_list argstr, t_printf *elem)
-{
-	unsigned short		i;
-	char				*str;
-
-	i = (unsigned short)va_arg(argstr, unsigned int);
-	str = ft_itoa_base(i, 10);
+	str = ft_itoa_base(elem->type.ui, 8);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
@@ -130,11 +67,9 @@ void		ft_mod_u_h(va_list argstr, t_printf *elem)
 
 void		ft_type_u(va_list argstr, t_printf *elem)
 {
-	unsigned int		i;
 	char				*str;
 
-	i = va_arg(argstr, unsigned int);
-	str = ft_itoa_base(i, 10);
+	str = ft_itoa_base(elem->type.ui, 10);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	elem->flg_hsh == '#' && str[0] != '0' ? ft_mod_hsh(&str, "0", '1') : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
@@ -152,6 +87,25 @@ void		ft_type_u(va_list argstr, t_printf *elem)
 		if (elem->flg_min == '-')
 			ft_put_n_char(' ', elem->width - ft_strlen(str));
 	}
+	else
+		ft_putstr(str);
+	free(str);
+}
+
+void		ft_type_x(va_list argstr, t_printf *elem, char type)
+{
+	char			*str;
+
+	str = ft_itoa_base(elem->type.ui, 16);
+	type == 'X' ? ft_toupper(&str) : 0;
+	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
+	if (elem->precision != -1 && elem->precision > ft_strlen(str))
+		ft_mod_precision(&str, elem, 1);
+	if (elem->flg_hsh == '#' && elem->precision != 0 &&
+		elem->width == -1 && str[1] != '\0')
+		ft_mod_hsh(&str, "0", type);
+	if (elem->width != -1 && elem->width > ft_strlen(str))
+		ft_mod_width(&str, elem, type);
 	else
 		ft_putstr(str);
 	free(str);

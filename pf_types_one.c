@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:53:20 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/29 14:49:25 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/03 14:46:29 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,8 @@ void		ft_type_non(char c, t_printf *elem)
 			ft_put_n_char(' ', elem->width - 1);
 	}
 	else
+	{
+		// printf("lol\n");
 		ft_put_n_char(c, 1);
+	}
 }
