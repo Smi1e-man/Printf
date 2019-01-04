@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/03 17:26:51 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/04 17:08:38 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct	s_list
 	int			precision;
 	int			size;
 
-	union		
+	union
 	{
 		ssize_t	i;
 		size_t	ui;
@@ -90,15 +90,16 @@ void			ft_save_size(const char *restrict str,
 /*
 **  types
 */
+void			ft_type_mod_d(va_list argstr, t_printf *elem);
+void			ft_type_mult(va_list argstr, t_printf *elem, char type);
 void			ft_type_c(va_list argstr, t_printf *elem);
 void			ft_type_s(va_list argstr, t_printf *elem);
 void			ft_type_p(va_list argstr, t_printf *elem);
-void			ft_type_mod_d(va_list argstr, t_printf *elem);
 void			ft_type_d(va_list argstr, t_printf *elem);
-void			ft_type_mult(va_list argstr, t_printf *elem, char type);
 void			ft_type_o(va_list argstr, t_printf *elem);
 void			ft_type_u(va_list argstr, t_printf *elem);
 void			ft_type_x(va_list argstr, t_printf *elem, char type);
+void			ft_type_f(va_list argstr, t_printf *elem);
 void			ft_type_non(char c, t_printf *elem);
 /*
 **	mods

@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 12:29:53 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/29 14:37:12 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/04 17:27:10 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	ft_save_size(const char *restrict str, int *count, t_printf *elem)
 			elem->size = 'h';
 		else if (str[count[0]] == 'l')
 			elem->size = 'l';
+		else if (str[count[0]] == 'L')
+			elem->size = 'L';
 		count[0]++;
 	}
 }
