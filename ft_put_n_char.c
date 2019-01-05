@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 21:08:31 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/04 16:37:44 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/05 16:14:37 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	ft_put_n_char(char c, int n)
 {
-	int		i;
+	char	*s1;
+	char	*s2;
 
-	i = 0;
-	while (i < n)
-	{
-		write(1, &c, 1);
-		i++;
-		g_out++;
-	}
+	s1 = ft_strnew(n);
+	s2 = ft_memset(s1, c, n);
+	write(1, s2, n);
+	free(s2);
+	g_out += n;
 }

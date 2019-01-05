@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 21:16:15 by seshevch          #+#    #+#             */
-/*   Updated: 2018/12/27 14:48:51 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/05 15:21:17 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 void	ft_putstr(char const *s)
 {
-	size_t	i;
-
-	if (s)
-	{
-		i = 0;
-		while (s[i])
-		{
-			ft_put_n_char(s[i], 1);
-			i++;
-		}
-	}
+	write(1, s, ft_strlen(s));
+	g_out += ft_strlen(s);
 }

@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:36:59 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/04 19:41:00 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/05 15:23:14 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ void		ft_type_f(va_list argstr, t_printf *elem)
 							va_arg(argstr, double);
 	i = val;
 	ft_type_f_prcsn(MDL(val), &str, elem, i);
-	// if (val < 0)
-	// 	printf("lol\n");
-	val < 0 ? elem->type.i = '-' : 0;
+	elem->type.val = (double)val;
+	elem->type.t_bits.sign ? elem->type.i = '-' : 0;
 	if (elem->width != -1 && elem->width > ft_strlen(str))
 	{
 		if ((elem->flg_min != '-' && elem->flg_nul != '0') ||

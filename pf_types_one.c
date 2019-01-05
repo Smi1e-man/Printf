@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:53:20 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/04 17:09:11 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/05 12:53:10 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void		ft_type_p(va_list argstr, t_printf *elem)
 
 	i = va_arg(argstr, unsigned long long);
 	str = ft_itoa_base(i, 16);
+	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
 	if (elem->precision != -1 && elem->precision > ft_strlen(str))
 		ft_mod_precision(&str, elem, 1);
 	if (elem->width != -1 && elem->width > ft_strlen(str))

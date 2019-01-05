@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/04 17:08:38 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/05 15:21:24 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,16 @@ typedef struct	s_list
 	{
 		ssize_t	i;
 		size_t	ui;
+		double	val;
+
+		struct	s_bits
+		{
+			unsigned int	mantissa : 32;
+			unsigned int	exponent : 31;
+			unsigned int	sign : 1;
+
+		}		t_bits;
+
 	}			type;
 
 }				t_printf;
