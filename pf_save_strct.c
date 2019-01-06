@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 12:29:53 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/04 17:27:10 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/06 19:49:40 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ void	ft_p(const char *restrict s, int *cnt, t_printf *el, va_list as)
 		{
 			el->precision = va_arg(as, int);
 			if (el->precision < 0)
-			{
-				el->precision *= -1;
-				el->flg_min = '-';
-			}
+				el->precision = -1;
 			cnt[0]++;
 		}
 		else

@@ -6,39 +6,26 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 18:51:05 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/05 15:59:10 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/06 19:57:41 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		ft_mod_precision(char **str, t_printf *elem, int check)
+void		ft_mod_mem_join(char **str, int numb, char smv, int check)
 {
 	char	*s1;
 	char	*s2;
 
+	s2 = ft_memset(ft_strnew(numb - ft_strlen(str[0])),
+						smv, numb - ft_strlen(str[0]));
 	if (check == 1)
-	{
-		s2 = ft_memset(ft_strnew(elem->precision - ft_strlen(str[0])),
-						'0', elem->precision - ft_strlen(str[0]));
 		s1 = ft_strjoin(s2, str[0]);
-		free(s2);
-		free(str[0]);
-		str[0] = s1;
-	}
 	else
-	{
-		if (elem->flg_hsh == '#' && elem->precision != 0)
-			s2 = ft_memset(ft_strnew(elem->width - ft_strlen(str[0]) - 2),
-							'0', elem->width - ft_strlen(str[0]) - 2);
-		else
-			s2 = ft_memset(ft_strnew(elem->width - ft_strlen(str[0])),
-							'0', elem->width - ft_strlen(str[0]));
-		s1 = ft_strjoin(s2, str[0]);
-		free(str[0]);
-		str[0] = s1;
-		free(s2);
-	}
+		s1 = ft_strjoin(str[0], s2);
+	free(s2);
+	free(*str);
+	str[0] = s1;
 }
 
 void		ft_mod_hsh(char **str, char *s, char type)
@@ -55,7 +42,25 @@ void		ft_mod_hsh(char **str, char *s, char type)
 	str[0] = s2;
 }
 
-void		ft_mod_width(char **str, t_printf *elem, char type)
+void		ft_mod_width_d(char **str, t_printf *elem)
+{
+	if (elem->flg_min == '-')
+	{
+		elem->flg_spc == ' ' ? ft_mod_hsh(&str[0], " ", '1') : 0;
+		ft_mod_mem_join(&str[0], elem->width, ' ', 2);
+	}
+	else if (elem->flg_nul == '0' && elem->precision == -1)
+	{
+		elem->type.i < 0 || elem->flg_sum == '+' || elem->flg_spc == ' ' ?
+		ft_mod_mem_join(&str[0], elem->width - 1, '0', 1) :
+		ft_mod_mem_join(&str[0], elem->width, '0', 1);
+		ft_mod_sign(&str[0], elem, ' ');
+	}
+	else
+		ft_mod_mem_join(&str[0], elem->width, ' ', 1);
+}
+
+void		ft_mod_width_x(char **str, t_printf *elem, char type)
 {
 	if ((elem->flg_min != '-' && elem->flg_nul != '0') ||
 		(elem->flg_min != '-' && elem->flg_nul == '0' &&
@@ -66,7 +71,12 @@ void		ft_mod_width(char **str, t_printf *elem, char type)
 	}
 	else if (elem->flg_min != '-' && elem->precision == -1 &&
 			elem->flg_nul == '0')
-		ft_mod_precision(&str[0], elem, 2);
+	{
+		if (elem->flg_hsh == '#' && elem->precision != 0)
+			ft_mod_mem_join(&str[0], elem->width - 2, '0', 1);
+		else
+			ft_mod_mem_join(&str[0], elem->width, '0', 1);
+	}
 	if (elem->flg_hsh == '#' && elem->precision != 0)
 		ft_mod_hsh(&str[0], "0", type);
 	ft_putstr(str[0]);
@@ -74,47 +84,12 @@ void		ft_mod_width(char **str, t_printf *elem, char type)
 		ft_put_n_char(' ', elem->width - ft_strlen(str[0]));
 }
 
-void		ft_path(char **str, t_printf *elem, char prnt, char *sml)
+void		ft_mod_sign(char **str, t_printf *elem, char type)
 {
-	if (prnt == '0')
-	{
-		elem->width -= 1;
-		ft_mod_precision(&str[0], elem, 2);
-	}
-	ft_mod_hsh(&str[0], sml, '1');
-}
-
-int			ft_flg_d(char **str, int i, char prnt, t_printf *elem)
-{
-	// printf("%d\n", ft_strlen(str[0]));
-	if ((i == '-' && (elem->flg_nul != '0' || elem->flg_min == '-')) ||
-		(i == '-' && elem->flg_nul == '0' && elem->flg_min != '-'))
-	{
-		// printf("lol\n");
-		ft_path(&str[0], elem, prnt, "-");
-		i = 2;
-	}
-	else if (elem->flg_sum == '+' && str[0][0] != '-' && elem->flg_nul != '0')
-	{
-		ft_path(&str[0], elem, prnt, "+");
-		elem->flg_sum = -1;
-	}
-	else if (elem->flg_nul == '0' && elem->flg_min != '-' && elem->precision == -1)
-	{
-		if (elem->flg_spc == ' ' || elem->flg_sum == '+' || i == '-')
-			elem->width -= 1;
-		ft_mod_precision(&str[0], elem, 2);
-		elem->flg_nul = -1;
-	}
-	else if (elem->flg_spc == ' ')
-	{
-		printf("lol\n");
+	if (elem->type.i == '-')
+		ft_mod_hsh(&str[0], "-", '1');
+	else if (elem->flg_sum == '+')
+		ft_mod_hsh(&str[0], "+", '1');
+	else if (elem->flg_spc == ' ' && type == ' ')
 		ft_mod_hsh(&str[0], " ", '1');
-		elem->flg_spc = -1;
-	}
-	if (prnt != -1 && prnt != '0')
-		ft_put_n_char(prnt, elem->width - ft_strlen(str[0]));
-	else if (prnt == -1)
-		ft_putstr(str[0]);
-	return (i);
 }

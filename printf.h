@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/05 15:21:24 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:15:49 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <string.h>
+
 # include <stdio.h>
 
 /*
@@ -49,6 +51,7 @@ char			*ft_strdup(const char *s1);
 char			*ft_itoa_base(unsigned long long val, int base);
 char			*ft_itoa_base_d(long long val, int base);
 void			ft_toupper(char **s);
+char			*ft_strdup(const char *s1);
 /*
 **  struct
 */
@@ -105,19 +108,21 @@ void			ft_type_mult(va_list argstr, t_printf *elem, char type);
 void			ft_type_c(va_list argstr, t_printf *elem);
 void			ft_type_s(va_list argstr, t_printf *elem);
 void			ft_type_p(va_list argstr, t_printf *elem);
-void			ft_type_d(va_list argstr, t_printf *elem);
-void			ft_type_o(va_list argstr, t_printf *elem);
-void			ft_type_u(va_list argstr, t_printf *elem);
-void			ft_type_x(va_list argstr, t_printf *elem, char type);
+void			ft_type_d(t_printf *elem);
+void			ft_type_o(t_printf *elem);
+void			ft_type_u(t_printf *elem);
+void			ft_type_x(t_printf *elem, char type);
 void			ft_type_f(va_list argstr, t_printf *elem);
 void			ft_type_non(char c, t_printf *elem);
 /*
 **	mods
 */
-void			ft_mod_precision(char **str, t_printf *elem, int check);
+void			ft_mod_mem_join(char **str, int numb, char smv, int check);
 void			ft_mod_hsh(char **str, char *s, char type);
 int				ft_flg_d(char **str, int i, char prnt, t_printf *elem);
 void			ft_path(char **str, t_printf *elem, char prnt, char *sml);
-void			ft_mod_width(char **str, t_printf *elem, char type);
+void			ft_mod_width_x(char **str, t_printf *elem, char type);
+void			ft_mod_width_d(char **str, t_printf *elem);
+void			ft_mod_sign(char **str, t_printf *elem, char type);
 
 #endif

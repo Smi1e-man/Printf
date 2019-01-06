@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/04 17:12:54 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:26:22 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_type_mod_d(va_list argstr, t_printf *elem)
 		elem->type.i = (short int)va_arg(argstr, int);
 	else
 		elem->type.i = va_arg(argstr, int);
-	ft_type_d(argstr, elem);
+	ft_type_d(elem);
 }
 
 void	ft_type_mult(va_list argstr, t_printf *elem, char type)
@@ -42,11 +42,11 @@ void	ft_type_mult(va_list argstr, t_printf *elem, char type)
 	else
 		elem->type.ui = va_arg(argstr, unsigned int);
 	if (type == 'u' || type == 'U')
-		ft_type_u(argstr, elem);
+		ft_type_u(elem);
 	else if (type == 'o')
-		ft_type_o(argstr, elem);
+		ft_type_o(elem);
 	else if (type == 'x' || type == 'X')
-		ft_type_x(argstr, elem, type);
+		ft_type_x(elem, type);
 }
 
 int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
