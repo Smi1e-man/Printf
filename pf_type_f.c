@@ -6,37 +6,27 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:36:59 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/06 19:58:21 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/19 18:47:54 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char		*ft_round(long double val, long long i, char *s1)
+long double	ft_round(long double val, t_printf *elem)
 {
-	int		len;
+	int				i;
+	long double		numb;
 
-	val /= 0.1;
-	i = val;
-	len = ft_strlen(s1) - 1;
-	if (i >= 5)
+	numb = 0.1;
+	i = 0;
+	while (i < elem->precision)
 	{
-		if (s1[len] != '9')
-			s1[len] += 1;
-		else
-		{
-			while (s1[len] == '9')
-			{
-				s1[len] = '0';
-				if (s1[len - 1] != '9' && s1[len - 1] != '.')
-					s1[len - 1] += 1;
-				if (s1[len - 1] == '.')
-					s1[len - 2] != '9' ? s1[len - 2] += 1 : len--;
-				len--;
-			}
-		}
+		numb /= 10;
+		i++;
 	}
-	return (s1);
+	numb *= 5;
+	val += val < 0 ? (numb * -1) : numb;
+	return (val);
 }
 
 void		ft_type_f_prcsn(long double val, char **str, t_printf *elem, long i)
@@ -46,7 +36,6 @@ void		ft_type_f_prcsn(long double val, char **str, t_printf *elem, long i)
 
 	str[0] = ft_itoa_base_d(i, 10);
 	val -= (long)val;
-	elem->precision == -1 ? elem->precision = 6 : 0;
 	if (elem->precision > 0)
 	{
 		s1 = ft_strjoin(str[0], ".");
@@ -62,24 +51,22 @@ void		ft_type_f_prcsn(long double val, char **str, t_printf *elem, long i)
 			s1 = s2;
 			val -= i;
 		}
-		str[0] = ft_round(val, i, s1);
+		str[0] = s1;
 	}
-	else if (elem->precision == 0)
-		str[0] = ft_round(val, i, str[0]);
 }
 
 void		ft_type_f(va_list argstr, t_printf *elem)
 {
 	char				*str;
-	long double			val;
 	long				i;
 
-	val = elem->size == 'L' ? va_arg(argstr, long double) :
+	elem->type.val = elem->size == 'L' ? (double)va_arg(argstr, long double) :
 							va_arg(argstr, double);
-	i = val;
-	ft_type_f_prcsn(MDL(val), &str, elem, i);
-	elem->type.val = (double)val;
-	elem->type.t_bits.sign ? elem->type.i = '-' : 0;
+	elem->precision == -1 ? elem->precision = 6 : 0;
+	elem->type.t_bits.sign ? elem->sign = '-' : 0;
+	elem->type.val = (double)ft_round(MDL(elem->type.val), elem);
+	i = elem->type.val;
+	ft_type_f_prcsn(MDL(elem->type.val), &str, elem, i);
 	if (elem->flg_nul != '0' || elem->flg_min == '-' ||
 		elem->width <= (int)ft_strlen(str) ||
 		(elem->width > (int)ft_strlen(str) && elem->precision != -1))

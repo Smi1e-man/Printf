@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:53:20 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/06 18:25:46 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/19 16:06:43 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		ft_type_s(va_list argstr, t_printf *elem)
 	char	*str;
 	char	*s1;
 
-	str = va_arg(argstr, char *);
+	str = elem->precision != 0 ? va_arg(argstr, char *) : 0;
 	str = str == NULL ? ft_strdup("(null)") : ft_strdup(str);
 	if (elem->precision != -1 && elem->precision < (int)ft_strlen(str))
 	{
@@ -61,7 +61,6 @@ void		ft_type_s(va_list argstr, t_printf *elem)
 
 void		ft_type_p_width(char **str, t_printf *elem)
 {
-	
 	elem->precision == -1 && elem->flg_nul == '0' ? ft_putstr("0x") : 0;
 	if ((elem->flg_min != '-' && elem->flg_nul != '0') ||
 		(elem->flg_min != '-' && elem->flg_nul == '0' &&
@@ -75,7 +74,6 @@ void		ft_type_p_width(char **str, t_printf *elem)
 		(elem->precision == -1 && elem->flg_nul != '0'))
 		ft_putstr("0x");
 	ft_putstr(str[0]);
-	
 	if (elem->flg_min == '-')
 		ft_put_n_char(' ', elem->width - ft_strlen(str[0]) - 2);
 }
@@ -85,7 +83,6 @@ void		ft_type_p(va_list argstr, t_printf *elem)
 	unsigned long long	i;
 	char				*str;
 
-	
 	i = va_arg(argstr, unsigned long long);
 	str = ft_itoa_base(i, 16);
 	elem->precision == 0 && str[0] == '0' ? str[0] = '\0' : 0;
@@ -98,7 +95,6 @@ void		ft_type_p(va_list argstr, t_printf *elem)
 		ft_putstr("0x");
 		ft_putstr(str);
 	}
-	
 	free(str);
 }
 

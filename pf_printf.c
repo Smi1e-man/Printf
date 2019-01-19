@@ -6,22 +6,27 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:53:31 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/06 18:26:22 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/19 17:41:15 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	ft_type_mod_d(va_list argstr, t_printf *elem)
+void	ft_type_mod_d(va_list argstr, t_printf *elem, char type)
 {
-	if (elem->size == 1)
+	if (elem->size == 1 && type != 'D')
 		elem->type.i = (signed char)va_arg(argstr, signed int);
 	else if (elem->size == 2)
 		elem->type.i = va_arg(argstr, long long int);
 	else if (elem->size == 'l')
 		elem->type.i = va_arg(argstr, long int);
-	else if (elem->size == 'h')
+	else if (elem->size == 'h' && type != 'D')
 		elem->type.i = (short int)va_arg(argstr, int);
+	else if ((elem->size == 'h' && type == 'D') ||
+			(elem->size == 1 && type == 'D'))
+		elem->type.i = (unsigned short int)va_arg(argstr, int);
+	else if (type == 'D')
+		elem->type.i = va_arg(argstr, long int);
 	else
 		elem->type.i = va_arg(argstr, int);
 	ft_type_d(elem);
@@ -29,7 +34,7 @@ void	ft_type_mod_d(va_list argstr, t_printf *elem)
 
 void	ft_type_mult(va_list argstr, t_printf *elem, char type)
 {
-	if (type == 'U')
+	if (type == 'U' || type == 'O')
 		elem->type.ui = va_arg(argstr, unsigned long);
 	else if (elem->size == 1)
 		elem->type.ui = (unsigned char)va_arg(argstr, unsigned int);
@@ -43,7 +48,7 @@ void	ft_type_mult(va_list argstr, t_printf *elem, char type)
 		elem->type.ui = va_arg(argstr, unsigned int);
 	if (type == 'u' || type == 'U')
 		ft_type_u(elem);
-	else if (type == 'o')
+	else if (type == 'o' || type == 'O')
 		ft_type_o(elem);
 	else if (type == 'x' || type == 'X')
 		ft_type_x(elem, type);
@@ -61,10 +66,10 @@ int		ft_check(const char *restrict str, va_list arg, int cnt, t_printf *el)
 		ft_type_s(arg, el);
 	else if (str[cnt] == 'p')
 		ft_type_p(arg, el);
-	else if (str[cnt] == 'd' || str[cnt] == 'i')
-		ft_type_mod_d(arg, el);
-	else if (str[cnt] == 'o' || str[cnt] == 'x' || str[cnt] == 'X' ||
-			str[cnt] == 'u' || str[cnt] == 'U')
+	else if (str[cnt] == 'd' || str[cnt] == 'i' || str[cnt] == 'D')
+		ft_type_mod_d(arg, el, str[cnt]);
+	else if (str[cnt] == 'o' || str[cnt] == 'O' || str[cnt] == 'x' ||
+			str[cnt] == 'X' || str[cnt] == 'u' || str[cnt] == 'U')
 		ft_type_mult(arg, el, str[cnt]);
 	else if (str[cnt] == 'f' || str[cnt] == 'F')
 		ft_type_f(arg, el);
@@ -108,7 +113,7 @@ int		ft_printf(const char *restrict str, ...)
 	elem = (t_printf*)malloc(sizeof(t_printf));
 	while ((count = ft_print_str(str, count)) != -1)
 	{
-		*elem = (t_printf){-1, -1, -1, -1, -1, -1, -1, -1};
+		*elem = (t_printf){-1, -1, -1, -1, -1, -1, -1, -1, -1};
 		count = ft_check(str, argstr, count, elem);
 		count++;
 	}

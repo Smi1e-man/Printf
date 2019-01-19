@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 13:59:22 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/06 18:15:49 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/19 19:38:05 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,20 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <string.h>
 
-# include <stdio.h>
+/*
+** color types
+*/
+
+# define EOC "\033[0m"
+
+# define RED "\033[1;31m"
+# define GRE "\033[32m"
+# define BLU "\033[34m"
+# define YEL "\033[1;33m"
+# define VIO "\033[35m"
+# define BLA "\033[30m"
+# define WHI "\033[1;37m"
 
 /*
 **	modul number
@@ -67,6 +78,8 @@ typedef struct	s_list
 	int			precision;
 	int			size;
 
+	int			sign;
+
 	union
 	{
 		ssize_t	i;
@@ -103,7 +116,7 @@ void			ft_save_size(const char *restrict str,
 /*
 **  types
 */
-void			ft_type_mod_d(va_list argstr, t_printf *elem);
+void			ft_type_mod_d(va_list argstr, t_printf *elem, char type);
 void			ft_type_mult(va_list argstr, t_printf *elem, char type);
 void			ft_type_c(va_list argstr, t_printf *elem);
 void			ft_type_s(va_list argstr, t_printf *elem);
@@ -121,7 +134,7 @@ void			ft_mod_mem_join(char **str, int numb, char smv, int check);
 void			ft_mod_hsh(char **str, char *s, char type);
 int				ft_flg_d(char **str, int i, char prnt, t_printf *elem);
 void			ft_path(char **str, t_printf *elem, char prnt, char *sml);
-void			ft_mod_width_x(char **str, t_printf *elem, char type);
+void			ft_mod_width_x(char **str, t_printf *elem, char type, char chr);
 void			ft_mod_width_d(char **str, t_printf *elem);
 void			ft_mod_sign(char **str, t_printf *elem, char type);
 

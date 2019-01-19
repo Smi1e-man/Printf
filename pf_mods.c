@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 18:51:05 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/06 19:57:41 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/19 18:06:04 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		ft_mod_width_d(char **str, t_printf *elem)
 	}
 	else if (elem->flg_nul == '0' && elem->precision == -1)
 	{
-		elem->type.i < 0 || elem->flg_sum == '+' || elem->flg_spc == ' ' ?
+		elem->sign == '-' || elem->flg_sum == '+' || elem->flg_spc == ' ' ?
 		ft_mod_mem_join(&str[0], elem->width - 1, '0', 1) :
 		ft_mod_mem_join(&str[0], elem->width, '0', 1);
 		ft_mod_sign(&str[0], elem, ' ');
@@ -60,7 +60,7 @@ void		ft_mod_width_d(char **str, t_printf *elem)
 		ft_mod_mem_join(&str[0], elem->width, ' ', 1);
 }
 
-void		ft_mod_width_x(char **str, t_printf *elem, char type)
+void		ft_mod_width_x(char **str, t_printf *elem, char type, char chr)
 {
 	if ((elem->flg_min != '-' && elem->flg_nul != '0') ||
 		(elem->flg_min != '-' && elem->flg_nul == '0' &&
@@ -77,7 +77,7 @@ void		ft_mod_width_x(char **str, t_printf *elem, char type)
 		else
 			ft_mod_mem_join(&str[0], elem->width, '0', 1);
 	}
-	if (elem->flg_hsh == '#' && elem->precision != 0)
+	if (elem->flg_hsh == '#' && elem->precision != 0 && chr != '0')
 		ft_mod_hsh(&str[0], "0", type);
 	ft_putstr(str[0]);
 	if (elem->flg_min == '-')
@@ -86,7 +86,7 @@ void		ft_mod_width_x(char **str, t_printf *elem, char type)
 
 void		ft_mod_sign(char **str, t_printf *elem, char type)
 {
-	if (elem->type.i == '-')
+	if (elem->sign == '-')
 		ft_mod_hsh(&str[0], "-", '1');
 	else if (elem->flg_sum == '+')
 		ft_mod_hsh(&str[0], "+", '1');
